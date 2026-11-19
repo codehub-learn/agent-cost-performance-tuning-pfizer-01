@@ -1,0 +1,3 @@
+Triage the GitHub issues of the mockito/mockito project in logs/triage-input.jsonl. Read that file once. It has one JSON object per line with number, title and body.
+Classify each issue as exactly one of: bug, enhancement, question, docs.
+Answer with one JSON object per line and nothing else, in the form {"number":<issue number>,"label":"<label>"}. Use no tools other than reading that file.

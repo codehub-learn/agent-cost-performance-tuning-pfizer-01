@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "bash scripts/hooks/budget-guard.sh",
+        "powershell": "pwsh -NoProfile -File scripts/hooks/budget-guard.ps1",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+# Released as .gitignore of the course repo (stage 0). Nothing here is secret; these are local or generated.
+data/*
+!data/.gitkeep
+logs/*
+!logs/.gitkeep

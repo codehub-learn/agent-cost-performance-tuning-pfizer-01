@@ -1,0 +1,75 @@
+# What each course stage releases. One entry per line: stage|source|destination|optional
+#   source       path in the build repo
+#   destination  path in the course folder (default: same as source)
+#   optional     file may be missing (skipped, no error)
+#   generated    not copied: release-course renders the source for the chosen agent (scripts/render-lab-guide.mjs)
+# A stage is cumulative with the ones before it: release stage 0, then 1, and so on. Files are only added or overwritten.
+# Never released (stay in the build repo): docs/, the build-only skills, scripts/release-course.*, scripts/snapshot-issues.*, scripts/lib/pick-issues.jq.
+# Generated at release time, not listed here: .lab-agent, data/.gitkeep, logs/.gitkeep.
+# Entries with an agent marker at the end of the line (see scripts/render-lab-guide.mjs) are released for that agent only.
+# LAB-GUIDE.md in the build repo is the source with the agent markers; the course folder gets a copy rendered for one agent (the `generated` entry below).
+# Never released: the build-only skills. .github/ is generated at release time.
+
+# Stage 0: before section 1. Setup, the data check, the fixed issue sample, the checks and the reset.
+0|AGENTS.md
+0|scripts/course.gitignore|.gitignore
+0|scripts/course.gitattributes|.gitattributes
+0|LAB-GUIDE.md|LAB-GUIDE.md|generated
+0|scripts/course-stages.txt
+0|eval/issues.jsonl
+0|eval/issues.sha256
+0|eval/subset10.txt
+0|scripts/fetch-data.sh
+0|scripts/fetch-data.ps1
+0|scripts/verify-data.sh
+0|scripts/verify-data.ps1
+0|scripts/lib/check.sh
+0|scripts/lib/check.ps1
+0|scripts/verify-lab.sh
+0|scripts/verify-lab.ps1
+0|scripts/reset-lab.sh
+0|scripts/reset-lab.ps1
+
+# Stage 1: start of section 1, Token economics. Read tokens and cost from the agent's own log; the budget guard.
+1|prompts/01-token-economics
+1|scripts/prepare-work.sh
+1|scripts/prepare-work.ps1
+1|scripts/report.sh
+1|scripts/report.ps1
+1|scripts/lib/report.jq
+1|scripts/lib/cost.jq
+1|scripts/lib/copilot-calls.jq
+1|scripts/lib/guard.jq
+1|scripts/lib/prices.json
+1|scripts/lib/triage-prompt.txt
+1|scripts/hooks/budget-guard.sh
+1|scripts/hooks/budget-guard.ps1
+
+# Stage 2: start of section 2, Cutting token cost. The scorer, the instruction variants, the retrieval controls, the caching run.
+2|prompts/02-cutting-token-cost
+2|scripts/score.sh
+2|scripts/score.ps1
+2|scripts/lib/score.jq
+2|scripts/run-variant.sh
+2|scripts/run-variant.ps1
+2|scripts/lib/triage-prompt-none.txt
+2|scripts/lib/triage-prompt-readme.txt
+2|scripts/lib/triage-prompt-capped.txt
+2|scripts/lib/triage-prompt-open.txt
+2|eval/variants
+
+# Stage 3: start of section 3, Latency tuning. Stream capture, where the time goes, sequential against parallel calls.
+3|prompts/03-latency-tuning
+3|scripts/run-stream.sh
+3|scripts/run-stream.ps1
+3|scripts/latency.sh
+3|scripts/latency.ps1
+3|scripts/lib/latency-copilot.jq
+3|scripts/lib/triage-prompt-seq.txt
+3|scripts/lib/triage-prompt-par.txt
+
+# Stage 4: start of section 4, Right-sizing the model. Small and large agents, the routing rule.
+4|prompts/04-right-sizing-the-model
+4|scripts/route.sh
+4|scripts/route.ps1
+4|scripts/lib/triage-prompt-conf.txt
